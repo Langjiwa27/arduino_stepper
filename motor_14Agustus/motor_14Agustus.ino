@@ -52,12 +52,12 @@ void motor() {
    for(int x = 0; x < 400; x++) {
      digitalWrite(stepPin,HIGH);
      digitalWrite(stepPin2,HIGH);
-     delayMicroseconds(500);
+     delay(500);
      Serial.print("Motor Muter High");
      Serial.println("");
      digitalWrite(stepPin,LOW);
      digitalWrite(stepPin2,LOW);
-     delayMicroseconds(500);
+     delay(500);
      Serial.print("Motor Muter Low");
      Serial.println("");
      }
@@ -68,24 +68,19 @@ void motor() {
       for(int x = 0; x < 400; x++) {
         digitalWrite(stepPin,HIGH);
         digitalWrite(stepPin2,HIGH);
-        delayMicroseconds(500);
+        delay(500);
         Serial.print("Motor Muter High");
         Serial.println("");
         digitalWrite(stepPin,LOW);
         digitalWrite(stepPin2,LOW);
-        delayMicroseconds(500);
+        delay(500);
         Serial.print("Motor Muter Low");
         Serial.println("");
         }
 }
 
-void loop(){
-  if (digitalRead(TblStart)==0){
-    motor();
-    delay(4000);
-    break();
-   
-      if ((millis() - lastButton) > delayAntiBouncing){
+void waktu(){
+  if ((millis() - lastButton) > delayAntiBouncing){
         if (i==0){
           lcd.clear();
           lcd.setCursor(0, 0);
@@ -102,8 +97,17 @@ void loop(){
         i =!i;
       }
       lastButton = millis();
+     
+}
+
+void loop(){
+  if (digitalRead(TblStart)==0){
+    waktu();
+    delay(500);
+      
   }
   else if (digitalRead(TblStop)==0 && fPaus == 1){
+  
     Serial.print("Motor Berhenti");
     dataStopWatch = 0;
     dataPaus = 0; 
@@ -147,6 +151,5 @@ void loop(){
       lcd.print("   ");
       }
    }
-//   if (digitalRead(TblStart)==0){
-//      
+  
 }
